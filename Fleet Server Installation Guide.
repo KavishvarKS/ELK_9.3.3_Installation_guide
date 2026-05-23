@@ -1,0 +1,113 @@
+# 🚀 Fleet Server Installation Guide  <IF ANY ISSUES IN ADDING FLEET AGENT FROM DEFAULT METHOD>
+
+<p align="center">
+Self-signed SSL deployment for Elastic Fleet Server (ELK 9.3.3)
+</p>
+
+---
+
+## 📑 Table of Contents
+
+- [📋 Prerequisites](#-prerequisites)
+- [🔐 Step 1 — Get Elasticsearch CA Fingerprint](#-step-1--get-elasticsearch-ca-fingerprint)
+- [🎫 Step 2 — Get Fleet Service Token](#-step-2--get-fleet-service-token)
+- [⚙️ Step 3 — Install Fleet Server](#️-step-3--install-fleet-server)
+- [✅ Step 4 — Verify Fleet Server](#-step-4--verify-fleet-server)
+- [🖥️ Step 5 — Install Agent on Another Machine](#️-step-5--install-agent-on-another-machine)
+- [🚨 Troubleshooting](#-troubleshooting)
+
+---
+
+## 📋 Prerequisites
+
+Ensure the following before starting:
+
+- Elasticsearch running
+- Kibana accessible
+- Fleet enabled
+- Port `9200` → Elasticsearch
+- Port `8220` → Fleet Server
+
+---
+
+## 🔐 Step 1 — Get Elasticsearch CA Fingerprint
+
+Run this on the ELK server:
+
+```bash
+ openssl x509 -fingerprint -sha256 -in /etc/elasticsearch/certs/http_ca.crt -noout     -->   RUN THIS CMD IN THE ELK SERVER..
+```
+
+Expected output:
+
+```text
+sha256 Fingerprint=29:1D:B2:C0:75:A6:78:E3:21:66:80:4A:94:F0:AD:2F
+```
+
+Convert the fingerprint:
+
+✅ Remove `:` characters
+
+✅ Convert to lowercase
+
+Final output:
+
+```text
+291db2c075a678e32166804a94f0ad2f3ba0ccf3f916d9a8420b93a84b4956d5
+```
+
+---
+
+## 🎫 Step 2 — Get Fleet Service Token
+
+Navigate in Kibana:
+
+```text
+Kibana
+└── Management
+    └── Fleet
+        └── Add Fleet Server
+```
+
+Copy the generated service token:
+
+```text
+AAEAAWVsYXN0aWMvZmxlZXQ...   <fleet-server-service-token=AAEAAWVs.....................>
+```
+
+---
+
+## ⚙️ Step 3 — Install Fleet Server
+
+Download Elastic Agent:
+
+```bash
+curl -L -O https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-9.3.3-linux-x86_64.tar.gz
+
+tar xzvf elastic-agent-9.3.3-linux-x86_64.tar.gz
+
+cd elastic-agent-9.3.3-linux-x86_64
+```
+
+Install Fleet Server:
+
+```bash
+sudo ./elastic-agent install \
+--fleet-server-es=https://YOUR_ELK_IP:9200 \
+--fleet-server-service-token=<TOKEN FREOM STEP 2> \
+--fleet-server-policy=fleet-server-policy \
+--fleet-server-es-ca-trusted-fingerprint=<FINGERPRINT FROM STEP 1> \
+--fleet-server-port=8220
+```
+
+---
+
+## ✅ Step 4 — Verify Fleet Server
+
+Check Elastic Agent service:
+
+```bash
+sudo systemctl status elastic-agent
+```
+
+WE CAN USE THIS TO ADD FLEET AGENT TO THE SERVER OR ANY OTHER INSTENSE.
