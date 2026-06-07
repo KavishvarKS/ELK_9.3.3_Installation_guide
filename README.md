@@ -8,9 +8,9 @@ Edit `/etc/kibana/kibana.yml` and ensure the following lines are set:
 ```yaml
 server.port: 5601
 server.host: 0.0.0.0
-elasticsearch.hosts: ["https://151.185.412.86 <OR> LOCALHOST:9200"]
-elasticsearch.username: "kibana_system"
-elasticsearch.password: "ejxtpWEDFCVBHJKwUdJ=W9Ytd7X"
+elasticsearch.hosts: ["https://151.185.412.86 <OR> LOCALHOST:9200"]  
+elasticsearch.username: "kibana_system"  -->Dont change
+elasticsearch.password: "ejxtpWEDFCVBHJKwUdJ=W9Ytd7X"   ---> Kibana password.
 elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/http_ca.crt"]
 elasticsearch.ssl.verificationMode: certificate
 ` ` `
