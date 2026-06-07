@@ -1,7 +1,7 @@
 I can see the issue — your Markdown formatting isn't rendering properly because the code blocks and headings aren't using correct Markdown syntax. Let me fix it for you.Here's your content properly formatted as clean Markdown. You can copy this into your `.md` file:Here's the clean Markdown source you can paste into your `.md` file on GitHub:
 
 ```markdown
-Kiindly note that from elk_installation.pdf on STEP 3 the 2 commands must be execuated as a single line command.
+Kiindly note that from elk_installation.pdf on STEP-3 the 2 commands must be execuated as a single line command.
 
 
 ## Additional Kibana configuration
