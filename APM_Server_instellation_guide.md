@@ -204,3 +204,6 @@ Observability → APM → Services
 - OS: Rocky Linux
 - Stack: ELK 9.x
 - Agent: `elastic-apm-node`
+<img width="1632" height="882" alt="Overview" src="https://github.com/user-attachments/assets/c51ec942-4f53-448e-a405-8453132ebc75" />
+<img width="1632" height="882" alt="Transactions" src="https://github.com/user-attachments/assets/c2ba2871-ff0d-4ee3-862c-6e2a5223804b" />
+<img width="1632" height="882" alt="Metrics" src="https://github.com/user-attachments/assets/33e9c3cb-bdfa-4403-8e3a-9b8353951ed5" />
